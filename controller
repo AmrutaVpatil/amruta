@@ -1,12 +1,16 @@
 var express=require('express')
 const cors = require('cors');
 var app=express()
-var mongodb=require('mongodb')
+var mongodb=require('mongodb');
+var mongoose = require('mongoose')
 const mongoClient=mongodb.MongoClient
 
  app.use(cors()); 
 //1. establish the connection
-let dburl=
+let dburl='mongodb+srv://sonii:<sonii123>@cluster0.hptbp.mongodb.net/'
+mongoose.connect(dburl)
+.then(()=> console.log('db connected'))
+.catch((err)=> console.log('db connection error : ',err))
 app.use(express.json())
 app.get('/', async function(req,res)
 
@@ -168,6 +172,4 @@ app.delete('/delete/:num', async function(req,res)
    }
 
 }) 
-
-
 app.listen(8000, ()=>console.log('Server is running in the port 8000'))
